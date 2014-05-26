@@ -54,25 +54,25 @@ class Object
 
 end
 
-
-class NilClass
-  def _?()
-    SafeNil.instance
-  end
-
-
-  def try(*args)
-    if args.length==0
-      # Hobo style try
-      CallIfAvailable.new(self)
-    else
-      # activesupport 2.3 style try
-      nil
+if ARGV[0]=='hobo:migration'
+  class NilClass
+    def _?()
+      SafeNil.instance
     end
+  
+  
+    def try(*args)
+      if args.length==0
+        # Hobo style try
+        CallIfAvailable.new(self)
+      else
+        # activesupport 2.3 style try
+        nil
+      end
+    end
+  
   end
-
 end
-
 
 class SafeNil
   include Singleton
